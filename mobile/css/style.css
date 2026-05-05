@@ -1,0 +1,275 @@
+/* ===================================================
+   style.css — Mobile version for Bogdan Betskov Portfolio
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --font-main: 'Inter', sans-serif;
+  --color-bg: #f4f5f7;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-border: rgba(229, 231, 235, 0.5);
+  --color-card-bg: rgba(255, 255, 255, 0.7);
+  --color-accent: #111111;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --transition-base: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(12px);
+}
+
+html, body {
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-size: 14px; /* Base font >= 12px requirement */
+}
+
+body {
+  padding-bottom: 80px; /* Space for fixed bottom nav */
+}
+
+/* ---------- Typography ---------- */
+p, a, span, div {
+  font-size: max(12px, 1rem); /* Assures text is at least 12px */
+}
+
+h1 { font-size: clamp(1.75rem, 6vw, 2.5rem); font-weight: 900; margin-bottom: 1rem; }
+h2 { font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 800; margin-bottom: 1rem; }
+
+/* ---------- Bottom Navigation (Glassmorphism) ---------- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  z-index: 1030;
+  box-shadow: 0 -4px 32px rgba(0,0,0,0.05);
+}
+
+.bottom-nav .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  padding: 0.5rem;
+  text-decoration: none;
+  min-height: 48px; /* Standard touch target size */
+  min-width: 48px;
+  justify-content: center;
+  border-radius: 12px;
+  transition: all var(--transition-base);
+}
+
+.bottom-nav .nav-link:active {
+  transform: scale(0.92);
+}
+
+.bottom-nav .nav-link.active {
+  color: var(--color-accent);
+  background: rgba(0,0,0,0.04);
+}
+
+/* Top header */
+.mobile-header {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+/* ---------- Content ---------- */
+.hero-section {
+  padding: 1rem;
+  text-align: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-section .lead {
+  margin-bottom: 2rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.btn-dark {
+  min-height: 52px; /* Active element distance/size */
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  border-radius: 14px;
+  width: 100%;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #111, #333);
+  border: none;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  color: white;
+}
+
+.btn-dark:active {
+  transform: scale(0.97);
+}
+
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #111, #555);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.timeline {
+  padding: 0 0.5rem;
+  position: relative;
+  border-left: 2px solid rgba(17, 17, 17, 0.1);
+  margin-left: 1rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.1);
+}
+
+.timeline-date { font-weight: 800; margin-bottom: 0.25rem; color: var(--color-muted); font-size: 0.9rem; }
+.timeline-role { font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; }
+.timeline-desc { color: var(--color-muted); line-height: 1.6; }
+
+/* ---------- Projects ---------- */
+.project-card {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.stack-badge {
+  background: rgba(17, 17, 17, 0.05);
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* ---------- Contacts ---------- */
+.contact-info {
+  margin-bottom: 2.5rem;
+  background: var(--color-card-bg);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.contact-info p {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-info a {
+  padding: 0.5rem 0; /* Increase touch target */
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.form-control {
+  min-height: 52px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.05);
+  border-color: var(--color-accent);
+  background: #fff;
+  outline: none;
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: none;
+}
+
+/* Breakpoints adaptation (Extra Small < 576px, Small >= 576px) */
+@media (min-width: 576px) {
+  .stats-row {
+    flex-direction: row;
+  }
+  .stat-card {
+    flex: 1;
+  }
+  .btn-dark {
+    width: auto;
+  }
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
